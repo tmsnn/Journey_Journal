@@ -1,6 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.http import Http404
-from django.shortcuts import redirect, render
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -71,18 +69,18 @@ class ManagerDetailAPIView(APIView):
 
 class CommentsListAPIView(APIView):
     def get(self, request, pk):
-        comments = Comment.objects.filter(voucher_id=pk)
+        comments = Comment.objects.filter(voucher=pk)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
+    def post(self, request, pk):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(voucher=pk)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    permission_classes = (Permission,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class CommentsList(APIView):
@@ -98,7 +96,7 @@ class CommentsList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    permission_classes = (Permission,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class CommentDetailAPIView(APIView):
@@ -125,3 +123,5 @@ class CommentDetailAPIView(APIView):
         comment = self.get_object(pk)
         comment.delete()
         return Response({'message': 'deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+    permission_classes = (Permission,)
