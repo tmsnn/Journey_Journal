@@ -1,4 +1,4 @@
-<img src="https://readme-typing-svg.demolab.com?font=Josefin+Sans&size=40&duration=3000&pause=500&color=360672&background=263F6800&center=true&vCenter=true&repeat=true&width=600&lines=Web+Project+-+Journey+Journal;" alt="..." />
+<a href="https://github.com/tmsnn/Journey_Journal"><img src="https://readme-typing-svg.demolab.com?font=Josefin+Sans&size=50&duration=3000&pause=500&color=360672&background=263F6800&center=true&vCenter=true&repeat=true&width=600&lines=Web+Project+-+Journey+Journal;" alt="..." /></a>
 
 ## Frontend:
 Angular, TypeScript, HTML, CSS  
