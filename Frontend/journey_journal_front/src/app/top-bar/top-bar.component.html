@@ -1,0 +1,13 @@
+<nav class="top-bar">
+  <a [routerLink]="['/']" class="logo">
+    <h1>Journey Journal</h1>
+  </a>
+  <div class="buttons">
+    <button *ngIf="!isLogged" (click)="loginButton()" class="button login-button">
+      Login
+    </button>
+    <button *ngIf="isLogged" (click)="logout()" class="button register-button">
+      Logout
+    </button>
+  </div>
+</nav>

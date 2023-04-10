@@ -1,0 +1,27 @@
+<div class="register-page">
+  <form class="form">
+    <h3 class="title">Register</h3>
+    <div class="input-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" placeholder="Name" [(ngModel)]="name">
+    </div>
+    <div class="input-group">
+      <label for="surname">Surname</label>
+      <input id="surname" type="text" placeholder="Surname" [(ngModel)]="surname">
+    </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input id="email" type="text" placeholder="Email" [(ngModel)]="email">
+    </div>
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input id="username" type="text" placeholder="Username" [(ngModel)]="login">
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+    <button class="button" type="submit" (click)="registerFunc()">Register</button>
+    <p class="message">Already registered? <a [routerLink]="['/login']">Sign In</a></p>
+  </form>
+</div>

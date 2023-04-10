@@ -1,0 +1,29 @@
+/*.sidenav {*/
+/*  height: 100%;*/
+/*  z-index: 1;*/
+/*  overflow-x: hidden;*/
+/*  padding-top: 80px;*/
+/*  background-color: rgba(223, 187, 253, 0.37);*/
+/*}*/
+
+/*.sidenav a {*/
+/*  padding: 10px 16px;*/
+/*  text-decoration: none;*/
+/*  color: #dc4666;*/
+/*  font-size: 18px;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.sidenav a:hover {*/
+/*  color: #fff;*/
+/*  background-color: #dc4666;*/
+/*}*/
+
+/*.category-icon {*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.category-name {*/
+/*  font-weight: bold;*/
+/*}*/

@@ -1,0 +1,71 @@
+.vouchers-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+.voucher {
+  width: 220px;
+}
+
+.voucher-name {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.voucher-rate {
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.search-bar {
+  margin: 30px 0;
+  width: 200px;
+  height: 50px;
+}
+
+input {
+  width: 500px;
+  height: 40px;
+  font-size: 20px;
+  background: #212121;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+}
+
+.count {
+  color: #000000;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #dc4666;
+  margin: 1rem 0;
+}
+
+.voucher-image {
+  transition-timing-function: ease-out;
+  transition: transform .25s;
+}
+
+.voucher-image:hover {
+  transition: transform .25s;
+  transition-timing-function: ease-out;
+  transform: scale(1.1);
+}

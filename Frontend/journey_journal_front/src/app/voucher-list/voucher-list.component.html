@@ -1,0 +1,24 @@
+<div class="search-bar">
+  <input [(ngModel)]="searchText" name="searchText" type="search" placeholder="Search for vouchers..."
+         aria-label="Search">
+</div>
+
+<div class="main-container">
+  <div class="vouchers-list-header">
+    <span class="count">{{vouchers.length}} Vouchers</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="vouchers-list">
+    <div *ngFor="let voucher of vouchers | filter: searchText" class="voucher">
+      <a [routerLink]="['/vouchers', voucher.id]">
+        <figure class="voucher-image">
+          <img src="assets/vouchers/{{voucher.img}}" alt="{{voucher.name}}">
+        </figure>
+        <p class="voucher-name">{{voucher.name}}</p>
+        <p class="voucher-rate">Rate: {{voucher.rate}}</p>
+      </a>
+    </div>
+  </div>
+</div>

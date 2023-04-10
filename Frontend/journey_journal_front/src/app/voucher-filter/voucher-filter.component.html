@@ -1,0 +1,8 @@
+<div class="sidenav">
+  <a *ngFor="let category of categories" [routerLink]="['/categories', category.id]">
+    <span class="category-icon">
+      <i class="fas fa-tag"></i>
+    </span>
+    <span class="category-name">{{ category.name }}</span>
+  </a>
+</div>

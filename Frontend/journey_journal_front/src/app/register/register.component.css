@@ -1,0 +1,75 @@
+/* Font family */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Login page */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Form */
+.form {
+  width: 400px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Input group */
+.input-group {
+  margin-bottom: 20px;
+}
+
+/* Label */
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+/* Input */
+.input-group input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button */
+button[type="submit"] {
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Message */
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Message link */
+.message a {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 700;
+}
