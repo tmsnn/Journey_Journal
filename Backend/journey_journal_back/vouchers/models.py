@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -13,6 +12,9 @@ class Category(models.Model):
 class Voucher(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    rate = models.CharField(max_length=300, default='')
+    img = models.CharField(max_length=300, default='')
+    like = models.IntegerField(default=0)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
@@ -20,24 +22,24 @@ class Voucher(models.Model):
         return self.name
 
 
-class Manager(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=300)
-    position = models.CharField(max_length=50)
-    department = models.CharField(max_length=50)
+    surname = models.CharField(max_length=300)
+    username = models.CharField(max_length=300)
     email = models.CharField(max_length=300)
     password = models.CharField(max_length=300)
-    hire_date = models.DateField()
+    img = models.CharField(max_length=300, default='')
 
     def __str__(self):
         return self.name
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
+    username = models.CharField(max_length=300, default='Anonymous')
+    description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     voucher = models.ForeignKey(Voucher, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.content
+        return self.description

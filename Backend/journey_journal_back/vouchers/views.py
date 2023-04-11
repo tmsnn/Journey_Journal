@@ -3,8 +3,8 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Voucher, Category, Comment, Manager
-from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, ManagerSerializer
+from .models import Voucher, Category, Comment, User
+from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer
 
 
 class Permission(permissions.BasePermission):
@@ -43,25 +43,25 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (Permission,)
 
 
-class ManagerListAPIView(APIView):
+class UserListAPIView(APIView):
     def get(self, request):
-        users = Manager.objects.all()
-        serializer = ManagerSerializer(users, many=True)
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     permission_classes = (permissions.IsAdminUser,)
 
 
-class ManagerDetailAPIView(APIView):
+class UserDetailAPIView(APIView):
     def get_object(self, pk):
         try:
-            return Manager.objects.get(id=pk)
-        except Manager.DoesNotExist as e:
+            return User.objects.get(id=pk)
+        except User.DoesNotExist as e:
             raise Http404
 
     def get(self, request, pk=None):
         user = self.get_object(pk)
-        serializer = ManagerSerializer(user)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
     permission_classes = (permissions.IsAdminUser,)

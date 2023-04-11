@@ -33,12 +33,12 @@
 }
 
 .login-button {
-  background-color: rgba(220, 70, 102, 0.9);
+  background-color: rgb(84, 84, 145);
   margin-right: 20px;
 }
 
 .register-button {
-  background-color: rgba(220, 70, 102, 0.7);
+  background-color: rgb(84, 84, 145);
 }
 
 .login-button:hover,

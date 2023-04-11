@@ -6,8 +6,13 @@
     <button *ngIf="!isLogged" (click)="loginButton()" class="button login-button">
       Login
     </button>
+
     <button *ngIf="isLogged" (click)="logout()" class="button register-button">
       Logout
+    </button>
+
+    <button (click)="registerButton()" class="button register-button">
+      Register
     </button>
   </div>
 </nav>

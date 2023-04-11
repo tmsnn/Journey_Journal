@@ -12,7 +12,7 @@ import {CategoryService} from "../category.service";
 })
 export class CategoryComponent implements OnInit {
   vouchers: Voucher[] = [];
-  category: Category | undefined;
+  category!: Category;
   searchText: any = '';
 
   constructor(

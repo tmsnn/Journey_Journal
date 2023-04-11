@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Voucher, Category, Manager, Comment
+from .models import Voucher, Category, User, Comment
 
 
 class VoucherSerializer(serializers.ModelSerializer):
@@ -14,9 +14,9 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ManagerSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Manager
+        model = User
         fields = '__all__'
 
 
