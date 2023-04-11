@@ -1,5 +1,6 @@
-from django.http import Http404
-from rest_framework import generics, permissions, status
+from django.http import Http404, JsonResponse
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -17,42 +18,48 @@ class Permission(permissions.BasePermission):
             return False
 
 
-class VoucherList(APIView):
-    def get(self, request):
-        vouchers = Voucher.objects.all()
-        serializer = VoucherSerializer(vouchers, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+@api_view(['GET'])
+def vouchers_list(request):
+    vocuhers = Voucher.objects.all()
+    serializers = VoucherSerializer(vocuhers, many=True)
+    return Response(serializers.data)
 
 
-class VoucherDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Voucher.objects.all()
-    serializer_class = VoucherSerializer
-    permission_classes = (Permission,)
+@api_view(['GET'])
+def vouchers_detail(request, voucher_id):
+    try:
+        voucher = Voucher.objects.get(id=voucher_id)
+    except Voucher.DoesNotExist as e:
+        return JsonResponse({'message': str(e)}, status=400)
+    serializer = VoucherSerializer(voucher)
+    return Response(serializer.data)
 
 
-class CategoryList(APIView):
-    def get(self, request):
-        categories = Category.objects.all()
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+@api_view(['GET'])
+def categories_list(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
 
 
-class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    permission_classes = (Permission,)
+@api_view(['GET'])
+def categories_vouchers(request, category_id):
+    try:
+        vouchers = Voucher.objects.filter(category=category_id)
+    except Voucher.DoesNotExist as e:
+        return JsonResponse({'message': str(e)}, status=400)
+    serializer = VoucherSerializer(vouchers, many=True)
+    return Response(serializer.data)
 
 
-class UserListAPIView(APIView):
+class UsersListAPIView(APIView):
     def get(self, request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    permission_classes = (permissions.IsAdminUser,)
 
-
-class UserDetailAPIView(APIView):
+class UsersDetailAPIView(APIView):
     def get_object(self, pk):
         try:
             return User.objects.get(id=pk)
@@ -64,39 +71,27 @@ class UserDetailAPIView(APIView):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    permission_classes = (permissions.IsAdminUser,)
-
 
 class CommentsListAPIView(APIView):
-    def get(self, request, pk):
-        comments = Comment.objects.filter(voucher=pk)
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_objects(self, voucher_id):
+        try:
+            return Comment.objects.filter(voucher=voucher_id)
+        except Comment.DoesNotExist as e:
+            raise Http404
+
+    def get(self, request, voucher_id=None):
+        comments = self.get_objects(voucher_id)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
-    def post(self, request, pk):
-        serializer = CommentSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(voucher=pk)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
-class CommentsList(APIView):
-    def get(self, request):
-        comments = Comment.objects.all()
-        serializer = CommentSerializer(comments, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
+    def post(self, request, voucher_id):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class CommentDetailAPIView(APIView):
@@ -106,12 +101,12 @@ class CommentDetailAPIView(APIView):
         except Comment.DoesNotExist as e:
             raise Http404
 
-    def get(self, request, id=None, pk=None):
+    def get(self, request, voucher_id=None, pk=None):
         comment = self.get_object(pk)
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
 
-    def put(self, request, id=None, pk=None):
+    def put(self, request, voucher_id=None, pk=None):
         comment = self.get_object(pk)
         serializer = CommentSerializer(instance=comment, data=request.data)
         if serializer.is_valid():
@@ -119,9 +114,7 @@ class CommentDetailAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-    def delete(self, request, id=None, pk=None):
+    def delete(self, request, voucher_id=None, pk=None):
         comment = self.get_object(pk)
         comment.delete()
         return Response({'message': 'deleted'}, status=status.HTTP_204_NO_CONTENT)
-
-    permission_classes = (Permission,)
