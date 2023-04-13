@@ -4,6 +4,7 @@ export interface Voucher {
   description: string;
   price: number;
   category: string;
+  img: string
 }
 
 
