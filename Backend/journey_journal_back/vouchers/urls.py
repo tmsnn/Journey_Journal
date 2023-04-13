@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
-    TokenRefreshView,
+    TokenRefreshView, TokenVerifyView,
 )
 from .views import categories_list, CommentsListAPIView, CommentDetailAPIView, categories_vouchers, vouchers_list, \
     vouchers_detail, \
@@ -10,6 +10,7 @@ from .views import categories_list, CommentsListAPIView, CommentDetailAPIView, c
 urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('categories/', categories_list),
     path('categories/<int:category_id>/', categories_vouchers),
     path('vouchers/', vouchers_list),
