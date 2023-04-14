@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import {VoucherListComponent} from "./voucher-list/voucher-list.component";
 import {VoucherDetailComponent} from "./voucher-detail/voucher-detail.component";
 import {CategoryComponent} from "./category/category.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/vouchers', pathMatch: 'full', component: VoucherListComponent},
   {path: 'vouchers/:id', component: VoucherDetailComponent},
-  {path: 'categories/:id', component: CategoryComponent}
+  {path: 'categories/:id', component: CategoryComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 .sidenav {
-  position: fixed;
+  position: static;
   height: 100%;
   overflow-x: hidden;
   padding-top: 80px;

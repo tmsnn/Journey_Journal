@@ -2,31 +2,38 @@
   <div class="voucher-detail-container">
 
     <div class="voucher-poster">
-      <img src="assets/vouchers/{{voucher.img}}" alt="voucher image" width="200" height="200">
+      <img src="assets/vouchers/{{voucher.img}}" alt="voucher image" width="500" height="500">
     </div>
 
     <div class="voucher-detail">
       <h2>{{voucher.name}}</h2>
       <div class="short-info">
+        <div><span>Category: <strong>{{voucher.category}}</strong></span></div>
+        <div><span>City: <strong></strong></span></div>
         <div class="rate"><span>Rate: <strong>{{voucher.rate}}</strong></span></div>
         <div class="duration"><span>Price: <strong>{{voucher.price}}</strong></span></div>
       </div>
-      <div class="like"><span>Likes: <strong>{{voucher.like}}</strong></span></div>
-      <p class="desc">
-        {{voucher.description}}
-      </p>
-      <button (click)="goBack()" class="backButton">Go Back</button>
+
       <div class="buttons">
         <p *ngIf="isLiked === false">
-          <button (click)="onClick()" class="likeButton">Like</button>
+          <button (click)="onClick()" class="likeButton">🤍️{{ voucher.like }}</button>
         </p>
         <p *ngIf="isLiked === true">
-          <button (click)="onClick()" class="likeButton">Unlike</button>
+          <button (click)="onClick()" class="likeButton">❤️️{{ voucher.like }}</button>
         </p>
         <p>
           <button (click)="share(voucher)">Share</button>
         </p>
       </div>
+
+    </div>
+    <div class = "details">
+      <h1>Description</h1>
+      <p class="desc">
+        {{voucher.description}}
+      </p>
+      <button (click)="goBack()" class="backButton">Go Back</button>
+
       <body>
       <div class="main-area">
         <h1>Comments</h1>
