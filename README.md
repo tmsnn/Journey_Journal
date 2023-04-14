@@ -14,53 +14,62 @@ To run this application locally, you'll need to have Python 3 and Node.js instal
 To get the backend up and running, follow these steps:
 
    Clone the repository and navigate to the backend directory 
-  ```Shell
-        $ git clone https://github.com/tmsnn/Journey_Journal.git
-  ```
+   ```Shell
+   $ git clone https://github.com/tmsnn/Journey_Journal.git
+   ```
    Create a new Python virtual environment using the command
    ```Shell
-       $ python3 -m venv env.
+   $ python3 -m venv env.
    ```
    Activate the virtual environment using the command
    ```Shell 
-       Windows: env\Scripts\activate.bat
-       Linux: source env/bin/activate
+   Windows: env\Scripts\activate.bat
+   Linux: source env/bin/activate
    ```
    Install the required Python packages using the command 
    ```Shell
-      $ pip install -r requirements.txt.
+   $ pip install -r requirements.txt.
    ```
-    Run the Django migrations using the command
+   Run the Django migrations using the command
+   ```Shell
+   $ python manage.py migrate.
+   ```
+   Create a new superuser account using the command
+   ```Shell
+   $ python manage.py createsuperuser.
+   ```
+   Start the Django development server using the command
     ```Shell
-        $ python manage.py migrate.
-    ```
-    Create a new superuser account using the command
-    ```Shell
-        $ python manage.py createsuperuser.
-    ```
-    Start the Django development server using the command
-    ```Shell
-        $ python manage.py runserver.
-    ```
+    $ python manage.py runserver.     ```
     
 ## Frontend Side:
    To get the frontend up and running, follow these steps:
    
-    Clone the repository and navigate to the frontend directory.
-    Install the required Node.js packages using the command npm install.
-    Start the Angular development server using the command ng serve.
+   Clone the repository and navigate to the backend directory
+   ```Shell
+   $ git clone https://github.com/tmsnn/Journey_Journal.git
+   ```
+
+   Install the required Node.js packages using the command
+   ```Shell
+   $ npm install.
+   ```
+   Start the Angular development server using the command
+   ```Shell
+   $ ng serve.
+   ```
     
 ## Usage:
 Once both the backend and frontend are up and running, you can access the web application by navigating to http://localhost:4200 in your web browser.
 
 The application provides the following functionality:
 
-    Browse vouchers by category.
-    View details of a specific voucher.
-    Add vouchers to the shopping cart.
-    Checkout and purchase vouchers.
-    View purchase history.
-    Add comments to vouchers.
+   Browse vouchers by category.
+   View details of a specific voucher.
+   Add vouchers to the shopping cart.
+   Checkout and purchase vouchers.
+   View purchase history.
+   Add comments to vouchers.
     
 ## API Endpoints:
 The application provides the following API endpoints:
