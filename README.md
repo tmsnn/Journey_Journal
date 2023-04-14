@@ -77,7 +77,7 @@ The application provides the following API endpoints:
 
     /vouchers/ - List all vouchers or create a new voucher.
     /vouchers/:id/ - Retrieve, update or delete a specific voucher.
-    categories/ - List all categories or create a new category.
+    /categories/ - List all categories or create a new category.
     /categories/:id/ - Retrieve, update or delete a specific category.
     /comments/ - List all comments or create a new comment.
     /comments/:id/ - Retrieve, update or delete a specific comment.
