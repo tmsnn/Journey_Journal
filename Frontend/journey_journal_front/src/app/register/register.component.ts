@@ -1,24 +1,37 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+
 })
+
+
 export class RegisterComponent implements OnInit {
-  email!: string;
-  login!: string;
-  password!: string;
-  name!: string;
-  surname!: string;
-
-  constructor() {
-  }
-
+  form!: FormGroup;
+  constructor(private formBuilder: FormBuilder,
+              private http: HttpClient,
+              private router: Router
+              ) {}
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      name: '',
+      surname: '',
+      email: '',
+      password: '',
+      username: ''
+    });
   }
+
+
 
   registerFunc(): void {
-    window.alert(`Registration is not available now. Please try again later`);
+    this.http.post('http://localhost:8000/api/register', this.form.getRawValue())
+      .subscribe(() => this.router.navigate(['/login']));
   }
+
 }

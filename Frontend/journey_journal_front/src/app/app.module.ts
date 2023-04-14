@@ -13,6 +13,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthInterceptor} from "./AuthInterceptor";
 import {RegisterComponent} from './register/register.component';
 import {FilterPipe} from './voucher-list/pipes';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,11 +27,13 @@ import {FilterPipe} from './voucher-list/pipes';
     LoginComponent,
     FilterPipe,
     TopBarComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', component: VoucherListComponent},
       {path: 'vouchers', component: VoucherListComponent},
