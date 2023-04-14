@@ -7,7 +7,7 @@ TypeScript, HTML, CSS, Framework Angular
 ## Backend: 
 Python, Framework Django 
 
-##Getting Started
+## Getting Started
 To run this application locally, you'll need to have Python 3 and Node.js installed on your machine. You can download Python 3 from the official website (https://www.python.org/downloads/) and Node.js from the official website (https://nodejs.org/en/download/).
 
 ## Backend: 
