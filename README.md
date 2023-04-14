@@ -19,7 +19,7 @@ To get the backend up and running, follow these steps:
    ```
    Create a new Python virtual environment using the command
    ```Shell
-   $ python3 -m venv env.
+   $ python3 -m venv venv
    ```
    Activate the virtual environment using the command
    ```Shell 
@@ -28,19 +28,19 @@ To get the backend up and running, follow these steps:
    ```
    Install the required Python packages using the command 
    ```Shell
-   $ pip install -r requirements.txt.
+   $ pip install -r requirements.txt
    ```
    Run the Django migrations using the command
    ```Shell
-   $ python manage.py migrate.
+   $ python manage.py migrate
    ```
    Create a new superuser account using the command
    ```Shell
-   $ python manage.py createsuperuser.
+   $ python manage.py createsuperuser
    ```
    Start the Django development server using the command
    ```Shell
-   $ python manage.py runserver.
+   $ python manage.py runserver
    ```
     
 ## Frontend Side:
@@ -53,11 +53,11 @@ To get the backend up and running, follow these steps:
 
    Install the required Node.js packages using the command
    ```Shell
-   $ npm install.
+   $ npm install
    ```
    Start the Angular development server using the command
    ```Shell
-   $ ng serve.
+   $ ng serve
    ```
     
 ## Usage:
