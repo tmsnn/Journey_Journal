@@ -10,19 +10,40 @@ Python, Framework Django
 ## Getting Started
 To run this application locally, you'll need to have Python 3 and Node.js installed on your machine. You can download Python 3 from the official website (https://www.python.org/downloads/) and Node.js from the official website (https://nodejs.org/en/download/).
 
-## Backend: 
+## Backend Side: 
 To get the backend up and running, follow these steps:
 
-    Clone the repository and navigate to the backend directory.
-    Create a new Python virtual environment using the command python3 -m venv env.
-    Activate the virtual environment using the command source env/bin/activate.
-    Install the required Python packages using the command pip install -r requirements.txt.
-    Create a new PostgreSQL database and add the database details to the DATABASES setting in the settings.py file.
-    Run the Django migrations using the command python manage.py migrate.
-    Create a new superuser account using the command python manage.py createsuperuser.
-    Start the Django development server using the command python manage.py runserver.
+   Clone the repository and navigate to the backend directory 
+  ```Shell
+        $ git clone https://github.com/tmsnn/Journey_Journal.git
+  ```
+   Create a new Python virtual environment using the command
+   ```Shell
+       $ python3 -m venv env.
+   ```
+   Activate the virtual environment using the command
+   ```Shell 
+       Windows: env\Scripts\activate.bat
+       Linux: source env/bin/activate
+   ```
+   Install the required Python packages using the command 
+   ```Shell
+      $ pip install -r requirements.txt.
+   ```
+    Run the Django migrations using the command
+    ```Shell
+        $ python manage.py migrate.
+    ```
+    Create a new superuser account using the command
+    ```Shell
+        $ python manage.py createsuperuser.
+    ```
+    Start the Django development server using the command
+    ```Shell
+        $ python manage.py runserver.
+    ```
     
-## Frontend:
+## Frontend Side:
    To get the frontend up and running, follow these steps:
    
     Clone the repository and navigate to the frontend directory.
