@@ -94,3 +94,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 | Akhtanov      | Amir          | [Click Here](https://github.com/AdonisVernaliss)  |
 | Ten           | Olga          | [Click Here](https://github.com/21BTen)           |
 | Nyshanbek     | Tomiris       | [Click Here](https://github.com//tmsnn)           |
+
+## License
+This project is licensed under the MIT License - see the `LICENSE` file for details.
