@@ -40,7 +40,8 @@ To get the backend up and running, follow these steps:
    ```
    Start the Django development server using the command
     ```Shell
-    $ python manage.py runserver.     ```
+    $ python manage.py runserver.     
+    ```
     
 ## Frontend Side:
    To get the frontend up and running, follow these steps:
