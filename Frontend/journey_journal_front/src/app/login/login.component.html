@@ -1,18 +1,15 @@
 <div class="login-page">
-  <div class="form">
-    <h3 class="title">Log in</h3>
-    <form class="login-form">
+  <form [formGroup]="form" (submit)="loginFunc()" class="form">
+   <h3 class="title">Log in</h3>
       <div class="input-group">
         <label for="username">Username</label>
-        <input id="username" type="text" [(ngModel)]="username" placeholder="Username"/>
+        <input formControlName="username" id="username" type="text" placeholder="Username" required/>
       </div>
       <div class="input-group">
         <label for="password">Password</label>
-        <input id="password" type="password" [(ngModel)]="password" placeholder="Password"/>
+        <input formControlName="password" id="password" type="password" placeholder="Password" required/>
       </div>
-      <button type="submit" (click)="loginFunc()">Log in</button>
+      <button type="submit">Log in</button>
       <p class="message">Don't have an account? <a [routerLink]="['/register']">Click here</a></p>
-    </form>
-  </div>
+  </form>
 </div>
-

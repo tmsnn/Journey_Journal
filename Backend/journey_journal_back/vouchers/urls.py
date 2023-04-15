@@ -23,5 +23,5 @@ urlpatterns = [
     path('comments/', CommentsListAPIView.as_view()),
     path('comments/<int:pk>/', CommentDetailAPIView.as_view()),
     path('api/register', RegisterView.as_view()),
-#     path('api/login', LoginView.as_view()),
+    path('api/login', LoginView.as_view()),
 ]
