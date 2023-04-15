@@ -19,12 +19,17 @@ To get the backend up and running, follow these steps:
    ```
    Create a new Python virtual environment using the command
    ```Shell
-   $ python3 -m venv venv
+   $ python -m venv venv
    ```
    Activate the virtual environment using the command
-   ```Shell 
-   Windows: env\Scripts\activate.bat
-   Linux: source env/bin/activate
+    
+   Windows:
+   ```Shell
+   $ env\Scripts\activate.bat
+   ```
+   Linux:
+   ```Shell
+   $ source env/bin/activate
    ```
    Install the required Python packages using the command 
    ```Shell
