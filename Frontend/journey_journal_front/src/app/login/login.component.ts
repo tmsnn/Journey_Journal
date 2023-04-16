@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {LoginService} from "../login.service";
-import {Location} from '@angular/common';
-import {AppComponent} from "../app.component";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -10,30 +9,21 @@ import {AppComponent} from "../app.component";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router,
-              private loginService: LoginService,
-              private location: Location
-  ) {
-  }
-
-  username = '';
-  password = '';
+  form !: FormGroup;
+  constructor(private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
-
-  loginFunc(): void {
-    this.loginService.login(this.username, this.password).subscribe((data) => {
-      AppComponent.isLogged = true;
-      this.location.back();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('username', this.username);
-      this.username = '';
-      this.password = '';
+    this.form = this.formBuilder.group({
+      username: '',
+      password: ''
     });
   }
+  loginFunc(): void{
+    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {withCredentials: true
+    }).subscribe(() => this.router.navigate(['/']));
+  }
+
 }

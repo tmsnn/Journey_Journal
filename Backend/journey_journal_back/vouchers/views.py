@@ -128,31 +128,20 @@ class RegisterView(APIView):
         serializer.save()
         return Response(serializer.data)
 
-# class LoginView(APIView):
-#     def post(self, request):
-#         username = request.data['username']
-#         password = request.data['password']
-#
-#         user = User.objects.filter(username=username).first()
-#
-#         if user is None:
-#             raise AuthenticationFailed('User not found!')
-#
-#         if not user.check_user_password(password):
-#             raise AuthenticationFailed('Incorrect password!')
-#
-#         payload = {
-#             'id': user.id,
-#             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-#             'iat': datetime.datetime.utcnow()
-#         }
-#
-#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
-#
-#         response = Response()
-#
-#         response.set_cookie(key='jwt', value=token, httponly=True)
-#         response.data = {
-#             'jwt': token
-#         }
-#         return response
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+def LoginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('vouchers') # replace 'home' with your desired URL
+        else:
+            error_msg = 'Invalid username or password'
+            return redirect('vouchers')
+    else:
+        error_msg = ''
+        return render(request, 'login.html', {'error_msg': error_msg})
