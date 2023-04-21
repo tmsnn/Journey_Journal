@@ -1,0 +1,11 @@
+<div class="vouchers-list">
+    <div *ngFor="let voucher of items " class="voucher">
+      <a [routerLink]="['/vouchers', voucher.id]">
+        <figure class="voucher-image">
+          <img src="assets/vouchers/{{voucher.img}}" alt="{{voucher.name}}" width="200" height="200">
+        </figure>
+        <p class="voucher-name">{{voucher.name}}</p>
+      </a>
+    </div>
+</div>
+
