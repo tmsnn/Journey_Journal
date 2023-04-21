@@ -6,12 +6,9 @@ from rest_framework_simplejwt.views import (
 )
 from .views import categories_list, CommentsListAPIView, CommentDetailAPIView, categories_vouchers, vouchers_list, \
     vouchers_detail, \
-    UsersListAPIView, UsersDetailAPIView, RegisterView
+    UsersListAPIView, UsersDetailAPIView, RegisterView, LoginView
 
 urlpatterns = [
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('categories/', categories_list),
     path('categories/<int:category_id>/', categories_vouchers),
     path('vouchers/', vouchers_list),
@@ -23,5 +20,5 @@ urlpatterns = [
     path('comments/', CommentsListAPIView.as_view()),
     path('comments/<int:pk>/', CommentDetailAPIView.as_view()),
     path('api/register', RegisterView.as_view()),
-#     path('api/login', LoginView.as_view()),
+    path('api/login', LoginView.as_view()),
 ]

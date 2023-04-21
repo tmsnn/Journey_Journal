@@ -21,6 +21,7 @@
 .buttons {
   display: flex;
   align-items: center;
+
 }
 
 .button {
@@ -39,6 +40,7 @@
 
 .register-button {
   background-color: rgb(84, 84, 145);
+  margin-left: 20px;
 }
 
 .login-button:hover,
@@ -54,5 +56,22 @@
   .button {
     font-size: 14px;
     padding: 8px 16px;
+
   }
+}
+
+button[type="submit"] {
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#favourites {
+  border: none;
+  background-color: white;
 }

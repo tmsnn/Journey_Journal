@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import check_password
 
 
 class Category(models.Model):
@@ -34,6 +35,7 @@ class User(models.Model):
         return self.name
 
 
+
 class Comment(models.Model):
     username = models.CharField(max_length=300, default='Anonymous')
     description = models.TextField()
@@ -43,3 +45,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    voucher = models.ForeignKey(Voucher, on_delete=models.CASCADE)
+
+
