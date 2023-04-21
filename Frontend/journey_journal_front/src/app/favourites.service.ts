@@ -13,7 +13,9 @@ export class FavouritesService {
 
 
   addToFavourites(voucher: Voucher) {
-    this.items.push(voucher);
+    if (!(this.items.some(v => v.id === voucher.id ))) {
+      this.items.push(voucher);
+    }
   }
 
   getItems() {
