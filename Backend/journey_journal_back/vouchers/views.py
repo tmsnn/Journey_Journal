@@ -4,6 +4,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+import jwt
+
 
 from .models import Voucher, Category, Comment, User
 from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer
@@ -128,31 +132,15 @@ class RegisterView(APIView):
         serializer.save()
         return Response(serializer.data)
 
-# class LoginView(APIView):
-#     def post(self, request):
-#         username = request.data['username']
-#         password = request.data['password']
-#
-#         user = User.objects.filter(username=username).first()
-#
-#         if user is None:
-#             raise AuthenticationFailed('User not found!')
-#
-#         if not user.check_user_password(password):
-#             raise AuthenticationFailed('Incorrect password!')
-#
-#         payload = {
-#             'id': user.id,
-#             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-#             'iat': datetime.datetime.utcnow()
-#         }
-#
-#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
-#
-#         response = Response()
-#
-#         response.set_cookie(key='jwt', value=token, httponly=True)
-#         response.data = {
-#             'jwt': token
-#         }
-#         return response
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = authenticate(username=username, password=password)
+        if not user:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})

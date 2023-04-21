@@ -14,7 +14,8 @@ import {AuthInterceptor} from "./AuthInterceptor";
 import {RegisterComponent} from './register/register.component';
 import {FilterPipe} from './voucher-list/pipes';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     FilterPipe,
     TopBarComponent,
+    FavouritesComponent,
 
   ],
   imports: [
@@ -34,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
       {path: '', component: VoucherListComponent},
       {path: 'vouchers', component: VoucherListComponent},
@@ -41,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: 'categories/:id', component: CategoryComponent},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
+      {path: 'favourite', component: FavouritesComponent},
     ]),
   ],
   providers: [

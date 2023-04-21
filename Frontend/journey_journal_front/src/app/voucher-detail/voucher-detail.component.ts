@@ -3,6 +3,8 @@ import {Commentary} from "../commentary";
 import {ActivatedRoute} from "@angular/router";
 import {VoucherService} from "../voucher.service";
 import {Location} from '@angular/common';
+import {FavouritesService} from "../favourites.service";
+import {Voucher} from "../vouchers";
 
 @Component({
   selector: 'app-voucher-detail',
@@ -13,6 +15,7 @@ export class VoucherDetailComponent implements OnInit {
   voucher: any;
   comments: Commentary[] = [];
   @Input() isLiked = false;
+  @Input() favourites = false;
   addClick = false;
   updateClick = false;
   descriptionText = '';
@@ -23,7 +26,9 @@ export class VoucherDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private voucherService: VoucherService,
-    private location: Location,) {
+    private location: Location,
+    private favouritesService: FavouritesService,
+    ) {
   }
 
   ngOnInit(): void {
@@ -58,6 +63,7 @@ export class VoucherDetailComponent implements OnInit {
       this.voucher.like -= 1;
       this.isLiked = false;
     }
+
   }
 
   editButton(id: number): void {
@@ -117,5 +123,11 @@ export class VoucherDetailComponent implements OnInit {
   share(voucher: { name: any; }): void {
     window.alert(`The voucher ${this.voucher.name} has been shared!`);
     window.open(`https://t.me/share/url?url=http://localhost:4200/vouchers/${this.voucher.id}&text=Watch this voucher ${voucher.name} on the Journey Journal.`);
+  }
+
+  addToFavourites(voucher: Voucher) {
+    this.favouritesService.addToFavourites(voucher);
+    window.alert('Your product has been added to favourites!');
+    this.favourites = true;
   }
 }
