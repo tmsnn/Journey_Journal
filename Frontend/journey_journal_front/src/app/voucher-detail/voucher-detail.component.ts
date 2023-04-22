@@ -28,7 +28,7 @@ export class VoucherDetailComponent implements OnInit {
     private voucherService: VoucherService,
     private location: Location,
     private favouritesService: FavouritesService,
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -72,51 +72,43 @@ export class VoucherDetailComponent implements OnInit {
   }
 
   newComment(): void {
-    if (this.descriptionText !== '') {
-      this.route.paramMap.subscribe((params) => {
-        const id = params.get('id');
-        if (id !== null) {
-          const comment = new Commentary(this.currentUserName as string, id,
-            this.descriptionText);
-          this.voucherService.createComment(id, comment).subscribe((comment) => {
-            this.getVoucher();
-            this.addClick = false;
-            this.descriptionText = '';
-          });
-        }
-      });
-    } else {
+    if (!this.descriptionText) {
       this.addClick = false;
+      return;
+    }
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      const comment = new Commentary(this.currentUserName as string, id, this.descriptionText);
+      this.voucherService.createComment(id, comment).subscribe((comment) => {
+        this.getVoucher();
+        this.addClick = false;
+        this.descriptionText = '';
+      });
     }
   }
 
   deleteButton(comment: Commentary): void {
-    this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id !== null) {
-        this.voucherService.deleteComment(id, comment.id).subscribe((comment) => {
-          this.getVoucher();
-        });
-      }
-    });
-    this.getVoucher();
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.voucherService.deleteComment(id, comment.id).subscribe(() => {
+        this.getVoucher();
+      });
+    }
   }
 
   updateButton(comment: Commentary): void {
-    if (this.updatedDescription !== '') {
-      comment.description = this.updatedDescription;
-      this.route.paramMap.subscribe((params) => {
-        const id = params.get('id');
-        if (id !== null) {
-          this.voucherService.updateComment(id, comment).subscribe((comment) => {
-            this.updateClick = false;
-            this.updatedDescription = '';
-            this.getVoucher();
-          });
-        }
-      });
-    } else {
+    if (!this.updatedDescription) {
       this.updateClick = false;
+      return;
+    }
+    comment.description = this.updatedDescription;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.voucherService.updateComment(id, comment).subscribe(() => {
+        this.updateClick = false;
+        this.updatedDescription = '';
+        this.getVoucher();
+      });
     }
   }
 
