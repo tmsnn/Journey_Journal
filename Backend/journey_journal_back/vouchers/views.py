@@ -6,11 +6,11 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-import jwt
+import jwt,datetime
 
 
-from .models import Voucher, Category, Comment, User
-from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer
+from .models import Voucher, Category, Comment, User, Favorite
+from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer, UserLoginSerializer, FavoritesSerializer
 
 
 class Permission(permissions.BasePermission):
@@ -55,6 +55,50 @@ def categories_vouchers(request, category_id):
         return JsonResponse({'message': str(e)}, status=400)
     serializer = VoucherSerializer(vouchers, many=True)
     return Response(serializer.data)
+
+@api_view(['GET', 'POST'])
+def favorite_list(request):
+    if request.method == 'GET':
+        favorites = Favorite.objects.all()
+        serializer = FavoritesSerializer(favorites, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = FavoritesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'DELETE'])
+def get_favorite_by_voucher(request,id):
+    if request.method == 'GET':
+        voucher_obj = Voucher.objects.get(id=id)
+        favorites_obj = Favorite.objects.filter(voucher=voucher_obj)
+        favorites = FavoritesSerializer(favorites_obj,many=True)
+
+        return Response(favorites.data)
+    if request.method == 'DELETE':
+        try:
+            voucher_obj = Voucher.objects.get(id=id)
+            favorite = Favorite.objects.filter(voucher=voucher_obj)
+            favorite.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Favorite.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+
+@api_view(['GET'])
+def get_favorites_by_user(request,id):
+    if request.method == 'GET':
+        user_obj = User.objects.get(id=id)
+        favorites_obj = Favorite.objects.filter(user=user_obj)
+        favorites = FavoritesSerializer(favorites_obj,many=True)
+
+        return Response(favorites.data)
+
+
 
 
 class UsersListAPIView(APIView):
@@ -135,12 +179,28 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        username = request.data['username']
+        password = request.data['password']
 
-        user = authenticate(username=username, password=password)
-        if not user:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        user = User.objects.filter(username=username).first()
 
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key})
+        if user is None:
+            raise AuthenticationFailed('User not found!')
+
+        payload = {
+            'id': user.id,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'iat': datetime.datetime.utcnow()
+        }
+
+        token = jwt.encode(payload, 'secret', algorithm='HS256')
+
+        response = Response()
+
+        response.set_cookie(key='jwt', value=token, httponly=True)
+        response.data = {
+            'jwt': token,
+            'id':user.id
+        }
+        return response
+

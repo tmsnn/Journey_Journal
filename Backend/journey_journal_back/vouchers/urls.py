@@ -5,13 +5,10 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView, TokenVerifyView,
 )
 from .views import categories_list, CommentsListAPIView, CommentDetailAPIView, categories_vouchers, vouchers_list, \
-    vouchers_detail, \
+    vouchers_detail, get_favorites_by_user, favorite_list,get_favorite_by_voucher, \
     UsersListAPIView, UsersDetailAPIView, RegisterView, LoginView
 
 urlpatterns = [
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('categories/', categories_list),
     path('categories/<int:category_id>/', categories_vouchers),
     path('vouchers/', vouchers_list),
@@ -24,5 +21,8 @@ urlpatterns = [
     path('comments/<int:pk>/', CommentDetailAPIView.as_view()),
     path('api/register', RegisterView.as_view()),
     path('api/login', LoginView.as_view()),
+    path('api/favorites/<int:id>/', get_favorites_by_user),
+    path('api/favorites/', favorite_list),
+    path('api/favorite/voucher/<int:id>/', get_favorite_by_voucher),
 
 ]
