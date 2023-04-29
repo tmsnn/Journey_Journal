@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
       AppComponent.isLogged = true;
       this.favouriteService.setId(response.id);
+    }, error => {
+      console.log('Error:', error);
+      window.alert('Wrong password or username!');
     });
+                 
   }
 }
