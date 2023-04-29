@@ -59,6 +59,7 @@
 
   }
 }
+
 button[type="submit"] {
   width: 100%;
   height: 40px;
@@ -70,7 +71,7 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-#favourites{
+#favourites {
   border: none;
   background-color: white;
 }

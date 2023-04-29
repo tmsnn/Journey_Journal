@@ -40,9 +40,11 @@ textarea{
   display: inline-block;
   font-size: 24px;
   color: red;
+  cursor: pointer;
 }
 .fa-telegram{
   color: #0099ff;
+  cursor: pointer;
 }
 #isLiked-false{
   border: none;
@@ -97,10 +99,13 @@ textarea{
 .fa-bookmark{
   border: none;
   background-color: white;
+  cursor: pointer;
+
 }
 #favourites-true{
   border: none;
   border-color: white;
+
 }
 #favourites-false{
   border: none;

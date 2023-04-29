@@ -3,7 +3,8 @@
     <h1>Journey Journal</h1>
   </a>
   <div class="buttons">
-    <button *ngIf="isLogged" (click)="favouritesButton()" id = "favourites"><i class="fa fa-bookmark fa-2x" style="color: #ff8800;" ></i></button>
+    <button *ngIf="isLogged" (click)="favouritesButton()" id="favourites"><i class="fa fa-bookmark fa-2x"
+                                                                             style="color: #ff8800;"></i></button>
     <button *ngIf="!isLogged" (click)="loginButton()" class="button login-button">
       Login
     </button>

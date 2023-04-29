@@ -83,3 +83,11 @@ input:focus {
   transition-timing-function: ease-out;
   transform: scale(1.1);
 }
+
+.divider {
+  border: none;
+  border-top: 1px solid #3939af;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgb(84, 84, 145);
+  width: 203%;
+}

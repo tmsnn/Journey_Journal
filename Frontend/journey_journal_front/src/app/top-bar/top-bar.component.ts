@@ -8,9 +8,10 @@ import {AppComponent} from '../app.component';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  favouritesButton(): void{
+  favouritesButton(): void {
     this.router.navigateByUrl('/favourite')
   }
+
   loginButton(): void {
     this.router.navigateByUrl('/login');
   }

@@ -3,11 +3,11 @@
     <h3 class="title">Log in</h3>
     <div class="input-group">
       <label for="username">Username</label>
-      <input formControlName="username" id="username" type="text" placeholder="Username" required/>
+      <input [(ngModel)]="username" formControlName="username" id="username" type="text" placeholder="Username" required/>
     </div>
     <div class="input-group">
       <label for="password">Password</label>
-      <input formControlName="password" id="password" type="password" placeholder="Password" required/>
+      <input [(ngModel)]="password" formControlName="password" id="password" type="password" placeholder="Password" required/>
     </div>
     <button type="submit">Log in</button>
     <p class="message">Don't have an account? <a [routerLink]="['/register']">Click here</a></p>

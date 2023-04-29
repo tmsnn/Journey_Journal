@@ -5,6 +5,8 @@ import {Location} from '@angular/common';
 import {AppComponent} from "../app.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {FavouritesService} from "../favourites.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,11 +15,13 @@ import {HttpClient} from "@angular/common/http";
 export class LoginComponent implements OnInit {
 
   form !: FormGroup;
+
   constructor(private router: Router,
               private loginService: LoginService,
               private location: Location,
               private http: HttpClient,
               private formBuilder: FormBuilder,
+              private favouriteService: FavouritesService,
   ) {
   }
 
@@ -36,22 +40,13 @@ export class LoginComponent implements OnInit {
     this.location.back();
   }
 
-  // loginFunc(): void {
-  //   this.loginService.login(this.username, this.password).subscribe((data) => {
-  //     AppComponent.isLogged = true;
-  //     this.location.back();
-  //     localStorage.setItem('token', data.token);
-  //     localStorage.setItem('username', this.username);
-  //     this.username = '';
-  //     this.password = '';
-  //   });
-  // }
-
-  loginFunc(): void{
-    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {withCredentials: true
-    }).subscribe(() => this.router.navigate(['/']));
-    AppComponent.isLogged = true;
+  loginFunc(): void {
+    this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {
+      withCredentials: true
+    }).subscribe((response: any) => {
+      this.router.navigate(['/']);
+      AppComponent.isLogged = true;
+      this.favouriteService.setId(response.id);
+    });
   }
-
-
 }

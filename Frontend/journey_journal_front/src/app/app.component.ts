@@ -8,8 +8,10 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit{
   static isLogged: boolean;
+  static id: 0;
   constructor(public router: Router) {
     AppComponent.isLogged = false;
+    AppComponent.id = 0;
   }
   title = 'journey_journal_front';
 
