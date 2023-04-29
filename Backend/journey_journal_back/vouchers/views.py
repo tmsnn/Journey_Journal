@@ -7,7 +7,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 import jwt,datetime
-
+from django.db.models import Q
 
 from .models import Voucher, Category, Comment, User, Favorite
 from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer, UserLoginSerializer, FavoritesSerializer
@@ -182,7 +182,7 @@ class LoginView(APIView):
         username = request.data['username']
         password = request.data['password']
 
-        user = User.objects.filter(username=username).first()
+        user = User.objects.filter(Q(username=username) & Q(password=password)).first()
 
         if user is None:
             raise AuthenticationFailed('User not found!')
