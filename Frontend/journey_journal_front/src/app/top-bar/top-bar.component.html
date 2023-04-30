@@ -13,7 +13,7 @@
       Logout
     </button>
 
-    <button (click)="registerButton()" class="button register-button">
+    <button *ngIf="!isLogged" (click)="registerButton()" class="button register-button">
       Register
     </button>
   </div>

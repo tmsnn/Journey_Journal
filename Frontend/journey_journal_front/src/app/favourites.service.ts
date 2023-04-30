@@ -1,29 +1,45 @@
 
 import { Voucher} from "./vouchers";
 import { Injectable } from '@angular/core';
+import {AppComponent} from "./app.component";
+import {HttpClient} from "@angular/common/http";
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import {Favorite} from "./favorites";
+import { map } from 'rxjs/operators';
 /* . . . */
 @Injectable({
   providedIn: 'root'
 })
 export class FavouritesService {
-  items: Voucher[] = [];
+  private id: number = 0;
+  BASE_URL = 'http://localhost:8000';
   constructor(
+    private client: HttpClient,
+
   ) {}
 
 
-
-  addToFavourites(voucher: Voucher) {
-    if (!(this.items.some(v => v.id === voucher.id ))) {
-      this.items.push(voucher);
-    }
+  getFavoritesByUser(): Observable<Favorite[]> {
+    return this.client.get<Favorite[]>(`${this.BASE_URL}/api/favorites/${this.getId()}/`);
+  }
+  addToFavourites(voucher: Voucher): Observable<any> {
+    const newFavorite = { user: this.getId(), voucher: voucher.id };
+    return this.client.post(`${this.BASE_URL}/api/favorites/`, newFavorite);
   }
 
-  getItems() {
-    return this.items;
+  deleteFavorite(id: number) {
+    return this.client.delete<Favorite[]>(`${this.BASE_URL}/api/favorite/voucher/${id}/`);
   }
 
-  clearFavourites() {
-    this.items = [];
-    return this.items;
+
+  setId(id: number): void {
+    this.id = id;
   }
+
+  getId(): number {
+    return this.id;
+  }
+
+
 }

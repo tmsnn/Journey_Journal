@@ -18,7 +18,7 @@ export class VoucherService {
     return this.client.get<Voucher[]>(`${this.BASE_URL}/vouchers/`);
   }
 
-  getVoucherDetail(id: string): Observable<Voucher> {
+  getVoucherDetail(id: any): Observable<Voucher> {
     return this.client.get<Voucher>(`${this.BASE_URL}/vouchers/${id}/`);
   }
 

@@ -32,7 +32,7 @@ class User(models.Model):
     img = models.CharField(max_length=300, default='')
 
     def __str__(self):
-        return self.name
+        return f"{self.id} - {self.name}"
 
 
 
@@ -50,5 +50,7 @@ class Comment(models.Model):
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     voucher = models.ForeignKey(Voucher, on_delete=models.CASCADE)
+    def __str__(self):
+            return f"{self.id} - {self.voucher}"
 
 

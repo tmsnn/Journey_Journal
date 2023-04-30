@@ -4,62 +4,76 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 p {
   font-size: 20px;
 }
-.voucher-poster{
+
+.voucher-poster {
   position: relative;
-  top:90px;
+  top: 90px;
   margin-left: 100px;
 }
-.voucher-detail{
+
+.voucher-detail {
   position: absolute;
   top: 200px;
   margin-left: 650px;
   padding: 10px;
 }
-.details{
+
+.details {
   position: absolute;
   top: 700px;
   margin-left: 90px;
 
   padding: 10px;
 }
-body{
+
+body {
   background-color: #e7e7fc;
   width: 1230px;
   padding: 20px;
   font-size: 18px;
 }
-textarea{
+
+textarea {
   width: 99%;
   height: 100px;
 }
 
-.fa-heart{
+.fa-heart {
   display: inline-block;
   font-size: 24px;
   color: red;
-}
-.fa-telegram{
-  color: #0099ff;
-}
-#isLiked-false{
-  border: none;
-  background-color: white;
-}
-#isLiked-true{
-  border: none;
-  background-color: white;
-}
-#share{
-  border: none;
-  background-color: white;
-}
-.buttons{
   cursor: pointer;
 }
-.backButton{
+
+.fa-telegram {
+  color: #0099ff;
+  cursor: pointer;
+}
+
+#isLiked-false {
+  border: none;
+  background-color: white;
+}
+
+#isLiked-true {
+  border: none;
+  background-color: white;
+}
+
+#share {
+  border: none;
+  background-color: white;
+}
+
+.buttons {
+  cursor: pointer;
+}
+
+.backButton {
   color: #545491;
   padding: 10px 20px;
   font-size: 16px;
@@ -71,7 +85,7 @@ textarea{
   font-weight: bold;
 }
 
-.comment-btn{
+.comment-btn {
   border: none;
   color: #ffffff;
   padding: 10px 20px;
@@ -82,27 +96,50 @@ textarea{
   margin-right: 20px;
   font-weight: bold;
 }
-.review{
+
+.review {
   background-color: #cecee3;
   margin-top: 20px;
 }
-.star{
+
+.star {
   color: #ffa600;
 
 }
-#comment-desc{
+
+#comment-desc {
   background-color: #e4e4ee;
 }
 
-.fa-bookmark{
+.fa-bookmark {
   border: none;
   background-color: white;
+  cursor: pointer;
+
 }
-#favourites-true{
+
+#favourites-true {
+  border: none;
+  border-color: white;
+
+}
+
+#favourites-false {
   border: none;
   border-color: white;
 }
-#favourites-false{
-  border: none;
-  border-color: white;
+
+.voucher-poster {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

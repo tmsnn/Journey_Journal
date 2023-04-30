@@ -9,7 +9,9 @@
 </div>
 
 <div class="main-container">
+  <hr class="divider">
   <div class="vouchers-list">
+
     <div *ngFor="let voucher of vouchers | filter: searchText" class="voucher">
       <a [routerLink]="['/vouchers', voucher.id]">
           <img src="assets/vouchers/{{voucher.img}}" alt="voucher" class="voucher-image" width="200" height="200">
@@ -17,5 +19,6 @@
         <p class="rate">Rate: {{voucher.rate}}</p>
       </a>
     </div>
+
   </div>
 </div>

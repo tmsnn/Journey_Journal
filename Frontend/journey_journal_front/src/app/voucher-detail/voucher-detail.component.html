@@ -28,10 +28,10 @@
         <button id = "share" (click)="share(voucher)"><i class="fab fa-telegram fa-2x"></i></button>
         </p>
         <p *ngIf="favourites === false">
-        <button id = "favourites-false" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x"></i></button>
+        <button *ngIf="isLogged" id = "favourites-false" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x" style="color: #919190;"></i></button>
         </p>
         <p *ngIf="favourites === true">
-          <button id = "favourites-true" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x" style="color: #ff8800;"></i></button>
+          <button *ngIf="isLogged" id = "favourites-true" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x" style="color: #ff8800;"></i></button>
         </p>
 <!--        <p>-->
 <!--          <button id = "share" (click)="share(voucher)"><i class="fab fa-telegram fa-2x"></i></button>-->
