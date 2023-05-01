@@ -34,4 +34,9 @@ export class RegisterComponent implements OnInit {
       .subscribe(() => this.router.navigate(['/login']));
   }
 
+  showPassword: boolean = false;
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

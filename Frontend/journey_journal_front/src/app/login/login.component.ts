@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
       console.log('Error:', error);
       window.alert('Wrong password or username!');
     });
-                 
+
+  }
+  showPassword: boolean = false;
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
