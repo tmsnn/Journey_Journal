@@ -7,7 +7,7 @@
     </div>
     <div class="input-group">
       <label for="password">Password</label>
-      <input [(ngModel)]="password" id="password" type="{{showPassword ? 'text' : 'password'}}" placeholder="Password" required>
+      <input [(ngModel)]="password" formControlName="password" id="password" type="{{showPassword ? 'text' : 'password'}}" placeholder="Password" required>
       <span class="password-toggle" (click)="toggleShowPassword()">
       <i class="fa" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
   </span>
