@@ -32,9 +32,10 @@ p {
 
 body {
   background-color: #e7e7fc;
-  width: 1230px;
+  width: 900px;
   padding: 20px;
   font-size: 18px;
+  margin-top: 40px;
 }
 
 textarea {
