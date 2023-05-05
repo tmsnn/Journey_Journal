@@ -20,7 +20,8 @@ export class TopBarComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
 
-  constructor(public router: Router) {
+  constructor(public router: Router,
+              ) {
     AppComponent.isLogged = false;
   }
 
@@ -37,7 +38,18 @@ export class TopBarComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.removeItem('id');
+    this.router.navigate(['/login']);
     AppComponent.isLogged = false;
   }
+
+
+  // logout(): void {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('username');
+  //   AppComponent.isLogged = false;
+  // }
+
+
+
 }

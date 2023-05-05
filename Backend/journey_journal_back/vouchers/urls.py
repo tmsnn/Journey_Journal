@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
 )
 from .views import categories_list, CommentsListAPIView, CommentDetailAPIView, categories_vouchers, vouchers_list, \
     vouchers_detail, get_favorites_by_user, favorite_list,get_favorite_by_voucher, \
-    UsersListAPIView, UsersDetailAPIView, RegisterView, LoginView
+    UsersListAPIView, UsersDetailAPIView, RegisterView, LoginView, LogoutView
 
 urlpatterns = [
     path('categories/', categories_list),
@@ -21,6 +21,7 @@ urlpatterns = [
     path('comments/<int:pk>/', CommentDetailAPIView.as_view()),
     path('api/register', RegisterView.as_view()),
     path('api/login', LoginView.as_view()),
+    path('api/logout', LogoutView.as_view()),
     path('api/favorites/<int:id>/', get_favorites_by_user),
     path('api/favorites/', favorite_list),
     path('api/favorite/voucher/<int:id>/', get_favorite_by_voucher),

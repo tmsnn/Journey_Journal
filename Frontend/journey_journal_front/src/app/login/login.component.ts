@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import {AppComponent} from "../app.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {FavouritesService} from "../favourites.service";
+
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
               private location: Location,
               private http: HttpClient,
               private formBuilder: FormBuilder,
-              private favouriteService: FavouritesService,
+
+
   ) {
   }
 
@@ -44,12 +45,15 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {
       withCredentials: true
     }).subscribe((response: any) => {
+      localStorage.setItem('token', response.jwt);
+      localStorage.setItem('id', response.id);
       this.router.navigate(['/']);
       AppComponent.isLogged = true;
-      this.favouriteService.setId(response.id);
+      this.loginService.setId(response.id);
     }, error => {
       console.log('Error:', error);
       window.alert('Wrong password or username!');
+
     });
 
   }

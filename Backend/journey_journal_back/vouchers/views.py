@@ -10,7 +10,7 @@ import jwt,datetime
 from django.db.models import Q
 
 from .models import Voucher, Category, Comment, User, Favorite
-from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer, UserLoginSerializer, FavoritesSerializer
+from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer, FavoritesSerializer
 
 
 class Permission(permissions.BasePermission):
@@ -204,3 +204,11 @@ class LoginView(APIView):
         }
         return response
 
+class LogoutView(APIView):
+    def post(self, request):
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {
+            'message': 'success'
+        }
+        return response
