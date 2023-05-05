@@ -47,7 +47,11 @@ import { FavouritesComponent } from './favourites/favourites.component';
     ]),
   ],
   providers: [
-    HttpClientModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   exports: [],
   bootstrap: [AppComponent]
