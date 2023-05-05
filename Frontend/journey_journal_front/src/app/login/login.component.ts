@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8000/api/login', this.form.getRawValue(), {
       withCredentials: true
     }).subscribe((response: any) => {
+      localStorage.setItem('token', response.jwt);
       this.router.navigate(['/']);
       AppComponent.isLogged = true;
       this.favouriteService.setId(response.id);
