@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AppComponent} from './app.component';
 import {VoucherListComponent} from './voucher-list/voucher-list.component';
 import {TopBarComponent} from './top-bar/top-bar.component';
@@ -15,6 +15,8 @@ import {FilterPipe} from './voucher-list/pipes';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { AuthInterceptor} from "./AuthInterceptor";
+
 
 @NgModule({
   declarations: [
