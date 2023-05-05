@@ -47,9 +47,10 @@ export class LoginComponent implements OnInit {
     }).subscribe((response: any) => {
       localStorage.setItem('token', response.jwt);
       localStorage.setItem('id', response.id);
+      localStorage.setItem('username', response.username);
       this.router.navigate(['/']);
       AppComponent.isLogged = true;
-      this.loginService.setId(response.id);
+
     }, error => {
       console.log('Error:', error);
       window.alert('Wrong password or username!');

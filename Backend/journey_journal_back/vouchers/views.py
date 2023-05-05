@@ -122,8 +122,6 @@ class UsersDetailAPIView(APIView):
 
 
 class CommentsListAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
     def get_objects(self, voucher_id):
         try:
             return Comment.objects.filter(voucher=voucher_id)
@@ -200,7 +198,8 @@ class LoginView(APIView):
         response.set_cookie(key='jwt', value=token, httponly=True)
         response.data = {
             'jwt': token,
-            'id':user.id
+            'id':user.id,
+            'username':user.username
         }
         return response
 
