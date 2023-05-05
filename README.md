@@ -86,8 +86,8 @@ The application provides the following API endpoints:
     /categories/:id/ - Retrieve, update or delete a specific category.
     /comments/ - List all comments or create a new comment.
     /comments/:id/ - Retrieve, update or delete a specific comment.
-    /api/auth/token/ - Obtain an authentication token.
-    /api/auth/token/refresh/ - Refresh an authentication token.
+    /api/login/ - API endpoint api/login allows users to authenticate and returns a JWT token.
+    /api/register/ - API endpoint api/register allows new users to register by creating a new user account.
     
 ## Contributing:
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
