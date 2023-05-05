@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {FavouritesService} from "../favourites.service";
 import {Voucher} from "../vouchers";
 import {AppComponent} from "../app.component";
+import{Favorite} from "../favorites";
 
 @Component({
   selector: 'app-voucher-detail',
@@ -14,6 +15,7 @@ import {AppComponent} from "../app.component";
 })
 export class VoucherDetailComponent implements OnInit {
   voucher: any;
+  favorites: Favorite[] = [];
   comments: Commentary[] = [];
   @Input() isLiked = false;
   @Input() favourites = false;
@@ -40,6 +42,10 @@ export class VoucherDetailComponent implements OnInit {
     if (token) {
       AppComponent.isLogged = true;
     }
+
+    this.favouritesService.getFavoritesByUser().subscribe((data: Favorite[]) => {
+      this.favorites = data;
+    });
   }
   get isLogged(): boolean {
     return AppComponent.isLogged;
@@ -127,13 +133,27 @@ export class VoucherDetailComponent implements OnInit {
   }
 
   addToFavourites(voucher: Voucher) {
-    this.favouritesService.addToFavourites(voucher).subscribe(() => {
-      window.alert('Your product has been added to favourites!');
+    const existingFavorite = this.favorites.find(favorite => favorite.voucher === voucher.id);
+    if (existingFavorite) {
+      window.alert('This voucher is already in your favorites!');
       this.favourites = true;
-    }, error => {
-      console.log('Error:', error);
-      window.alert('Failed to add the product to favourites!');
-    });
+    } else {
+      // Get user ID from localStorage
+      const userId = localStorage.getItem('id');
+      if (!userId) {
+        window.alert('User ID is missing!');
+        return;
+      }
+      // Add voucher to favorites
+      this.favouritesService.addToFavourites(voucher, userId).subscribe(() => {
+        window.alert('Your product has been added to favorites!');
+        this.favourites = true;
+      }, error => {
+        console.log('Error:', error);
+        window.alert('Failed to add the product to favorites!');
+      });
+    }
   }
+
 
 }

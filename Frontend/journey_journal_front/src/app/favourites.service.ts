@@ -1,18 +1,17 @@
 
 import { Voucher} from "./vouchers";
 import { Injectable } from '@angular/core';
-import {AppComponent} from "./app.component";
 import {HttpClient} from "@angular/common/http";
-import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {Favorite} from "./favorites";
-import { map } from 'rxjs/operators';
+import {HttpHeaders} from "@angular/common/http";
+
 /* . . . */
 @Injectable({
   providedIn: 'root'
 })
 export class FavouritesService {
-  private id: number = 0;
+
   BASE_URL = 'http://localhost:8000';
   constructor(
     private client: HttpClient,
@@ -21,25 +20,34 @@ export class FavouritesService {
 
 
   getFavoritesByUser(): Observable<Favorite[]> {
-    return this.client.get<Favorite[]>(`${this.BASE_URL}/api/favorites/${this.getId()}/`);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+
+    return this.client.get<Favorite[]>(`${this.BASE_URL}/api/favorites/`, httpOptions);
   }
-  addToFavourites(voucher: Voucher): Observable<any> {
-    const newFavorite = { user: this.getId(), voucher: voucher.id };
-    return this.client.post(`${this.BASE_URL}/api/favorites/`, newFavorite);
+
+  addToFavourites(voucher: Voucher, userId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    const newFavorite = { user: userId, voucher: voucher.id };
+    return this.client.post(`${this.BASE_URL}/api/favorites/`, newFavorite, httpOptions);
   }
+
 
   deleteFavorite(id: number) {
     return this.client.delete<Favorite[]>(`${this.BASE_URL}/api/favorite/voucher/${id}/`);
   }
 
 
-  setId(id: number): void {
-    this.id = id;
-  }
 
-  getId(): number {
-    return this.id;
-  }
 
 
 }

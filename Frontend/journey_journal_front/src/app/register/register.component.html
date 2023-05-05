@@ -20,8 +20,12 @@
     </div>
     <div class="input-group">
       <label for="password">Password</label>
-      <input formControlName="password" id="password" type="password" placeholder="Password" required>
+      <input formControlName="password" id="password" type="{{showPassword ? 'text' : 'password'}}" placeholder="Password" required>
+      <span class="input-group-addon" (click)="toggleShowPassword()">
+    <i class="fa" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+  </span>
     </div>
+
     <button class="button" type="submit">Register</button>
     <p class="message">Already registered? <a [routerLink]="['/login']">Sign In</a></p>
   </form>

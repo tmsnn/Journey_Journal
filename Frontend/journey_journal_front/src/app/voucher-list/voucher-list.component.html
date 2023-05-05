@@ -16,9 +16,7 @@
   <div class="vouchers-list">
     <div *ngFor="let voucher of vouchers | filter: searchText" class="voucher">
       <a [routerLink]="['/vouchers', voucher.id]">
-<!--        <figure class="voucher-image">-->
-          <img src="assets/vouchers/{{voucher.img}}" alt="{{voucher.name}}" width="200" height="200">
-<!--        </figure>-->
+          <img class="voucher-image" src="assets/vouchers/{{voucher.img}}" alt="{{voucher.name}}" width="200" height="200">
         <p class="voucher-name">{{voucher.name}}</p>
         <p class="voucher-rate">Rate: {{voucher.rate}}</p>
       </a>

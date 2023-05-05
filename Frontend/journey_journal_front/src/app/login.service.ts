@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  items = [];
+  private id: number = 0;
   BASE_URL = 'http://127.0.0.1:8000';
 
   constructor(
@@ -21,4 +21,12 @@ export class LoginService {
       password
     });
   }
+  setId(id: number): void {
+    this.id = id;
+  }
+
+  getId(): number {
+    return this.id;
+  }
+
 }

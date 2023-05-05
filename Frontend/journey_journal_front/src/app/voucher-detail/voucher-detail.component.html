@@ -31,11 +31,9 @@
         <button *ngIf="isLogged" id = "favourites-false" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x" style="color: #919190;"></i></button>
         </p>
         <p *ngIf="favourites === true">
-          <button *ngIf="isLogged" id = "favourites-true" (click) = "addToFavourites(voucher)"><i class="fa fa-bookmark fa-2x" style="color: #ff8800;"></i></button>
+          <button *ngIf="isLogged" id = "favourites-true" ><i class="fa fa-bookmark fa-2x" style="color: #ff8800;"></i></button>
         </p>
-<!--        <p>-->
-<!--          <button id = "share" (click)="share(voucher)"><i class="fab fa-telegram fa-2x"></i></button>-->
-<!--        </p>-->
+
       </div>
 
     </div>
@@ -49,12 +47,13 @@
       <body>
       <div class="main-area">
         <h1>Comments</h1>
-        <div>
+        <div *ngIf = "isLogged">
           <label>Leave a review</label>
           <textarea rows="5" placeholder="Enter the comment" [(ngModel)]="descriptionText"></textarea>
+          <button class = "comment-btn" type="button" (click)=newComment()>Post</button>
+          <br>
         </div>
-        <button class = "comment-btn" type="button" (click)=newComment()>Post</button>
-        <br>
+
         <div>
           <div *ngFor="let comment of comments">
             <div>
