@@ -91,10 +91,15 @@ export class VoucherDetailComponent implements OnInit {
       this.addClick = false;
       return;
     }
+    const username = localStorage.getItem('username');
+    if (!username) {
+      window.alert('Username is missing!');
+      return;
+    }
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const comment = new Commentary(this.currentUserName as string, id, this.descriptionText);
-      this.voucherService.createComment(id, comment).subscribe((comment) => {
+      const comment = new Commentary(username, this.voucher.id, this.descriptionText);
+      this.voucherService.createComment(this.voucher.id, comment).subscribe((comment) => {
         this.getVoucher();
         this.addClick = false;
         this.descriptionText = '';

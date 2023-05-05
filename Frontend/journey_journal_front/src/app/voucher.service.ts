@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Voucher} from './vouchers';
 import {Commentary} from "./commentary";
@@ -30,8 +30,14 @@ export class VoucherService {
     return this.client.get<Commentary[]>(`${this.BASE_URL}/vouchers/${id}/comments/`);
   }
 
-  createComment(id: string, comment: Commentary): Observable<any> {
-    return this.client.post(`${this.BASE_URL}/vouchers/${id}/comments/`, comment);
+  createComment(id: number, comment: Commentary): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    return this.client.post(`${this.BASE_URL}/vouchers/${id}/comments/`, comment, httpOptions);
   }
 
   updateComment(id: string, comment: Commentary): Observable<any> {
