@@ -13,14 +13,14 @@ from .models import Voucher, Category, Comment, User, Favorite
 from .serializers import VoucherSerializer, CategorySerializer, CommentSerializer, UserSerializer, FavoritesSerializer
 
 
-class Permission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.method == 'GET':
-            return True
-        elif request.user and request.user.is_staff:
-            return True
-        else:
-            return False
+# class Permission(permissions.BasePermission):
+#     def has_permission(self, request, view):
+#         if request.method == 'GET':
+#             return True
+#         elif request.user and request.user.is_staff:
+#             return True
+#         else:
+#             return False
 
 
 @api_view(['GET'])
